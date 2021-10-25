@@ -3,7 +3,7 @@ import { useState} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import ImagePop from './ImagePopup';
+import ImagePopup from './ImagePopup';
 import PopupWithForm from './PopupWithForm';
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
     onCardClick={handleCardClick}
      />
     <Footer />
-    <ImagePop card={selectedCard} onClose={closeAllPopups}/>
+    <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     <PopupWithForm title="Редактировать профиль"  name="profile" popupid="popup-profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
       <label>
         <input className="popup__input" type="text" name="name" id="popup-profile-title" placeholder="Ваше имя" defaultValue="" required maxLength="40" minLength="2" />
