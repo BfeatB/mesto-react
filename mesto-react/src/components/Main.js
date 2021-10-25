@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import fakeDude from '../images/unknown-avatar.jpeg';
-import api from '../utils/Api.js'
+import api from '../utils/api.js'
+import Card from './Card';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar,onCardClick}) {
 
     const [userName, setUserName] = useState("");
     const [userDescription, setUserDescription] = useState("");
     const [userAvatar, setUserAvatar] = useState(fakeDude);
+    const [cards, setCards] =useState([]);
 
     useEffect(() => {
         api.getUserInfo().then((data) => {
@@ -14,7 +16,13 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
             setUserDescription(data.about);
             setUserAvatar(data.avatar);
         })
-    })
+    }, []);
+
+    useEffect(() => {
+        api.getInitialCards().then((data) => {
+            setCards(data);
+        })
+    }, []);
 
     return (
         <main className="main">
@@ -34,7 +42,9 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
 
             <section className="cards-section">
             <ul className="cards">
-
+                {cards.map((card) => {
+                    return <Card key={card._id} card={card} onCardClick={onCardClick}/>
+                })}
             </ul>
             </section>
 

@@ -12,6 +12,11 @@ function App() {
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
     const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] = useState(false);
+    const [selectedCard, setSelectedCard] = useState(undefined);
+
+    const handleCardClick = (card) => {
+      setSelectedCard(card);
+    }
 
     const handleEditAvatarClick = () => {
         setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -33,6 +38,7 @@ function App() {
       setIsAddPlacePopupOpen(false);
       setIsEditAvatarPopupOpen(false);
       setIsConfirmationPopupOpen(false);
+      setSelectedCard(undefined);
     }
 
   return (
@@ -43,9 +49,10 @@ function App() {
     onEditAvatar={handleEditAvatarClick} 
     onEditProfile={handleEditProfileClick}
     onBinClick={handleConfirmationClick}
+    onCardClick={handleCardClick}
      />
     <Footer />
-    <ImagePop />
+    <ImagePop card={selectedCard} onClose={closeAllPopups}/>
     <PopupWithForm title="Редактировать профиль"  name="profile" popupid="popup-profile" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
       <label>
         <input className="popup__input" type="text" name="name" id="popup-profile-title" placeholder="Ваше имя" defaultValue="" required maxLength="40" minLength="2" />
