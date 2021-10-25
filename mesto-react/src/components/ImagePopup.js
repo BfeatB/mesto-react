@@ -2,12 +2,12 @@ import React from 'react';
 
 function ImagePop() {
     return(
-    <div class="popup" id="popup-gallery">
-        <div class="popup__gallery">
-            <button type="button" class="popup__close" data-popupid="popup-gallery"></button>
-            <figure class="popup__figure">
-            <img class="popup__img-gallery" src="#" alt="" />
-            <figcaption class="popup__figcaption"></figcaption>
+    <div className="popup" id="popup-gallery">
+        <div className="popup__gallery">
+            <button type="button" className="popup__close" data-popupid="popup-gallery"></button>
+            <figure className="popup__figure">
+            <img className="popup__img-gallery" src="#" alt="" />
+            <figcaption className="popup__figcaption"></figcaption>
             </figure>
         </div>
     </div>
