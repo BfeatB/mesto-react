@@ -5,6 +5,6 @@
 
 .button:hover:not([disabled="disabled"]) {
   opacity: 60%;
-  transition: opacity .2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
   cursor: pointer;
 }
