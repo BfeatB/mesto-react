@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -r ssh://git@ssh.github.com:443/BfeatB/mesto-react.git"
   },
   "eslintConfig": {
     "extends": [
