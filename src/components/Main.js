@@ -10,29 +10,34 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api.getUserInfo().then((data) => {
-      setUserName(data.name);
-      setUserDescription(data.about);
-      setUserAvatar(data.avatar);
-    });
+    api
+      .getUserInfo()
+      .then((data) => {
+        setUserName(data.name);
+        setUserDescription(data.about);
+        setUserAvatar(data.avatar);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   useEffect(() => {
-    api.getInitialCards().then((data) => {
-      setCards(data);
-    });
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
     <main className="main">
       <section className="profile">
-        <div className="profile__img-wrapper">
-          <img
-            className="profile__avatar"
-            src={userAvatar}
-            alt="аватар"
-            onClick={onEditAvatar}
-          />
+        <div className="profile__img-wrapper" onClick={onEditAvatar}>
+          <img className="profile__avatar" src={userAvatar} alt="аватар" />
         </div>
         <div className="profile__info">
           <div className="profile__main-info">

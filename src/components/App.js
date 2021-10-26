@@ -54,7 +54,6 @@ function App() {
       <PopupWithForm
         title="Редактировать профиль"
         name="profile"
-        popupid="popup-profile"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
@@ -98,7 +97,6 @@ function App() {
       <PopupWithForm
         title="Новое место"
         name="profileaddCard"
-        popupid="popup-place"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
@@ -135,11 +133,7 @@ function App() {
         </button>
       </PopupWithForm>
 
-      <PopupWithForm
-        title="Вы уверены?"
-        name="confirmation"
-        popupid="popup-confirmation"
-      >
+      <PopupWithForm title="Вы уверены?" name="confirmation">
         <button
           className="popup__button button"
           type="submit"
@@ -152,7 +146,6 @@ function App() {
       <PopupWithForm
         title="Обновить аватар"
         name="changeAvatar"
-        popupid="popup-change-avatar"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
@@ -167,11 +160,7 @@ function App() {
           />
           <span className="popup__error-message popup-change-avatar-url-error"></span>
         </label>
-        <button
-          className="popup__button button"
-          type="submit"
-          data-popupid="popup-change-avatar"
-        >
+        <button className="popup__button button" type="submit">
           Сохранить
         </button>
       </PopupWithForm>
