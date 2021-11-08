@@ -8,6 +8,7 @@ import api from "../utils/api";
 import CurrentUserContext from "../context/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -80,11 +81,22 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    console.log(card);
     api
       .deleteCard(card._id)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleAddPlaceSubmit(card) {
+    api
+      .addNewCard(card)
+      .then((newCard) => {
+        setCards((state) => [newCard, ...state]);
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -138,38 +150,11 @@ function App() {
         onUpdateUser={handleUpdateUser}
       />
 
-      <PopupWithForm
-        title="Новое место"
-        name="profileaddCard"
-        submitText="Создать"
+      <AddPlacePopup
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-      >
-        <label>
-          <input
-            className="popup__input"
-            type="text"
-            name="place"
-            id="popup-place-name"
-            placeholder="Название места"
-            required
-            maxLength="30"
-            minLength="2"
-          />
-          <span className="popup__error-message popup-place-name-error"></span>
-        </label>
-        <label>
-          <input
-            className="popup__input"
-            type="url"
-            name="url"
-            id="popup-place-url"
-            placeholder="Ссылка на картинку"
-            required
-          />
-          <span className="popup__error-message popup-place-url-error"></span>
-        </label>
-      </PopupWithForm>
+        onAddNewCard={handleAddPlaceSubmit}
+      />
 
       <PopupWithForm
         title="Вы уверены?"
