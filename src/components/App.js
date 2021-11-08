@@ -16,6 +16,7 @@ function App() {
   const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(undefined);
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api
@@ -46,6 +47,44 @@ function App() {
       .then((res) => {
         setCurrentUser(res);
         closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    api
+      .getInitialCards()
+      .then((data) => {
+        setCards(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+    api
+      .changeCardLikeStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? newCard : c))
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleCardDelete(card) {
+    console.log(card);
+    api
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
         console.log(err);
@@ -87,6 +126,9 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onBinClick={handleConfirmationClick}
         onCardClick={handleCardClick}
+        cards={cards}
+        onCardDelete={handleCardDelete}
+        onCardLike={handleCardLike}
       />
       <Footer />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
