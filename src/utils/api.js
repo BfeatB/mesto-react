@@ -44,11 +44,7 @@ class Api {
   }
 
   changeCardLikeStatus(cardId, isLiked) {
-    if (isLiked) {
-      return this.deleteLike(cardId);
-    } else {
-      return this.setLike(cardId);
-    }
+    return isLiked ? this.deleteLike(cardId) : this.setLike(cardId);
   }
 
   setLike(cardId) {
