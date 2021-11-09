@@ -11,8 +11,6 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
     onUpdateAvatar({
       avatar: avatarRef.current.value,
-      name: currentUser.name,
-      about: currentUser.about,
     });
 
     evt.target.reset();
